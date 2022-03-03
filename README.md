@@ -1,24 +1,35 @@
-# HTT-Bootstrap-Front-end-Gulp-Grunt-
+
+# High Level Threads Front End
+
 Fully Functioning Front End of HTT (High Level Threads), Clothing E commerce Website.
 
-Contains:
-Bootstrap
--Resp
+## Bootstrap
 
+- Responsive Design and Bootsrap Grid System
+- Bootstrap CSS and JavaScript Components
+- Modals, Jumbotron, Forms, Carousel,  etc
+## Web Tools
 
+- Git
+- Node.js and NPM
+- Grunt and Gulp
 ## Installation
 
 Install the project with npm
 
 ```bash
   npm install
+```
   or
+```bash
   yarn install
 ```
- Gulp and Grunt have been configured properly, Just type gulp or grunt to get started.
+ Gulp and Grunt have been configured properly, In terminal Just type:
  ```bash
   grunt
+```
   or
+```bash
   gulp
 ```
 To get started.
