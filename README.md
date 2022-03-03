@@ -33,4 +33,6 @@ Install the project with npm
   gulp
 ```
 To get started.
+
+Guided by: Prof. Associate Professor at Hong Kong University of Science and Technology
     
