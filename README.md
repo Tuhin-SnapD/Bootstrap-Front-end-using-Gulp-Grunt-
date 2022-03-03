@@ -35,6 +35,6 @@ Install the project with npm
 To get started.
 
 # Guided by: 
-# Prof. Jogesh Muppala 
+### Prof. Jogesh Muppala 
 > Associate Professor at Hong Kong University of Science and Technology
     
