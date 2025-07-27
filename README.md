@@ -19,10 +19,13 @@ Install the project with npm
 
 ```bash
   npm install
+  npm install -g gulp-cli grunt-cli
+
 ```
   or
 ```bash
   yarn install
+  yarn install -g gulp-cli grunt-cli
 ```
  Gulp and Grunt have been configured properly, In terminal Just type:
  ```bash
