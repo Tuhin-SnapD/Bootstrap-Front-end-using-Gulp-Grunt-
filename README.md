@@ -1,6 +1,6 @@
-# High Level Threads - Front-End Project
+# Ristorante Con Fusion - Front-End Project
 
-This repository contains the complete front-end code for "High Level Threads," a fictional restaurant website. The project is built with Bootstrap 4 and demonstrates modern web development workflows using both **Gulp** and **Grunt** for task automation.
+This repository contains the complete front-end code for "Ristorante Con Fusion," a fictional restaurant website. The project is built with Bootstrap 4 and demonstrates modern web development workflows using both **Gulp** and **Grunt** for task automation.
 
 ## Key Features
 - **Responsive Design**: Fully responsive layout using the Bootstrap 4 grid system.
