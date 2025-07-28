@@ -1,81 +1,97 @@
 'use strict';
 
-var gulp = require('gulp'),
-	del = require('del'),
-	imagemin = require('gulp-imagemin'),
-    sass = require('gulp-sass'),
-    browserSync = require('browser-sync'),
-    uglify = require('gulp-uglify'),
-    usemin = require('gulp-usemin'),
-    rev = require('gulp-rev'),
-    cleanCss = require('gulp-clean-css'),
-    flatmap = require('gulp-flatmap'),
-    htmlmin = require('gulp-htmlmin');
+const gulp = require('gulp');
+const del = require('del');
+const imagemin = require('gulp-imagemin');
+const sass = require('gulp-sass')(require('sass'));
+const browserSync = require('browser-sync').create();
+const uglify = require('gulp-uglify');
+const usemin = require('gulp-usemin');
+const rev = require('gulp-rev');
+const cleanCss = require('gulp-clean-css');
+const flatmap = require('gulp-flatmap');
+const htmlmin = require('gulp-htmlmin');
 
- 
-gulp.task('sass', function () {
+// Compile Sass
+function compileSass() {
   return gulp.src('./css/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./css'));
-});
+    .pipe(gulp.dest('./css'))
+    .pipe(browserSync.stream());
+}
 
-gulp.task('sass:watch', function () {
-  gulp.watch('./css/*.scss', ['sass']);
-});
+// Watch Sass
+function watchSass() {
+  gulp.watch('./css/*.scss', compileSass);
+}
 
-gulp.task('browser-sync', function () {
-   var files = [
+// Browser Sync
+function browserSyncInit() {
+  browserSync.init({
+    server: {
+      baseDir: './'
+    },
+    files: [
       './*.html',
       './css/*.css',
       './img/*.{png,jpg,gif}',
       './js/*.js'
-   ];
+    ]
+  });
+}
 
-   browserSync.init(files, {
-      server: {
-         baseDir: "./"
-      }
-   });
+// Clean dist folder
+function clean() {
+  return del(['dist']);
+}
 
-});
+// Copy Fonts
+function copyFonts() {
+  return gulp.src('./node_modules/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+    .pipe(gulp.dest('./dist/fonts'));
+}
 
-// Default task
-gulp.task('default', ['browser-sync'], function() {
-    gulp.start('sass:watch');
-});
-
-// Clean
-gulp.task('clean', function() {
-    return del(['dist']);
-});
-
-gulp.task('copyfonts', function() {
-   gulp.src('./node_modules/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
-});
-
-// Images
-gulp.task('imagemin', function() {
+// Optimize Images
+function optimizeImages() {
   return gulp.src('img/*.{png,jpg,gif}')
-    .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
+    .pipe(imagemin())
     .pipe(gulp.dest('dist/img'));
-});
+}
 
-gulp.task('usemin', function() {
+// Minify and revision assets
+function processUsemin() {
   return gulp.src('./*.html')
-  .pipe(flatmap(function(stream, file){
-      return stream
-        .pipe(usemin({
-            css: [ rev() ],
-            html: [ function() { return htmlmin({ collapseWhitespace: true })} ],
-            js: [ uglify(), rev() ],
-            inlinejs: [ uglify() ],
-            inlinecss: [ cleanCss(), 'concat' ]
-        }))
+    .pipe(flatmap((stream, file) => {
+      return stream.pipe(usemin({
+        css: [rev()],
+        html: [htmlmin({ collapseWhitespace: true })],
+        js: [uglify(), rev()],
+        inlinejs: [uglify()],
+        inlinecss: [cleanCss(), 'concat']
+      }));
     }))
     .pipe(gulp.dest('dist/'));
-});
+}
 
-gulp.task('build',['clean'], function() {
-    gulp.start('copyfonts','imagemin','usemin');
-});
+// Default task
+const defaultTask = gulp.series(
+  compileSass,
+  gulp.parallel(browserSyncInit, watchSass)
+);
+
+// Build task
+const build = gulp.series(
+  clean,
+  gulp.parallel(copyFonts, optimizeImages, processUsemin)
+);
+
+// Expose tasks
+exports.sass = compileSass;
+exports.watch = watchSass;
+exports['browser-sync'] = browserSyncInit;
+exports.clean = clean;
+exports.copyfonts = copyFonts;
+exports.imagemin = optimizeImages;
+exports.usemin = processUsemin;
+exports.build = build;
+exports.default = defaultTask;
