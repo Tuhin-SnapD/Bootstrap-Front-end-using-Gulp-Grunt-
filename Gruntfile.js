@@ -1,60 +1,63 @@
 'use strict';
 
 module.exports = function (grunt) {
-    // Time how long tasks take. Can help when optimizing build times
+    // Time how long tasks take
     require('time-grunt')(grunt);
 
     // Automatically load required Grunt tasks
     require('jit-grunt')(grunt, {
-  		useminPrepare: 'grunt-usemin'
-	});
+        useminPrepare: 'grunt-usemin'
+    });
 
     // Define the configuration for all the tasks
     grunt.initConfig({
+        // Sass compilation
         sass: {
             dist: {
                 files: {
-                    'css/styles.css': 'css/styles.scss'
+                    'src/css/styles.css': 'src/css/styles.scss'
                 }
             }
         },
+
+        // Watch files for changes
         watch: {
-            files: 'css/*.scss',
+            files: 'src/css/*.scss',
             tasks: ['sass']
         },
+
+        // Browser Sync for development
         browserSync: {
             dev: {
                 bsFiles: {
-                    src : [
-                        'css/*.css',
-                        '*.html',
-                        'js/*.js'
+                    src: [
+                        'src/css/*.css',
+                        'src/html/*.html',
+                        'src/js/*.js'
                     ]
                 },
                 options: {
                     watchTask: true,
                     server: {
-                        baseDir: "./"
+                        baseDir: "./src/html"
                     }
                 }
             }
         },
+
+        // Copy files
         copy: {
             html: {
-                files: [
-                {
-                    //for html
+                files: [{
                     expand: true,
                     dot: true,
-                    cwd: './',
+                    cwd: './src/html',
                     src: ['*.html'],
                     dest: 'dist'
-                }]                
+                }]
             },
             fonts: {
-                files: [
-                {
-                    //for font-awesome
+                files: [{
                     expand: true,
                     dot: true,
                     cwd: 'node_modules/font-awesome',
@@ -63,105 +66,74 @@ module.exports = function (grunt) {
                 }]
             }
         },
+
+        // Clean build directory
         clean: {
             build: {
-                src: [ 'dist/']
-            }
-        },
-        imagemin: {
-            dynamic: {
-                files: [{
-                    expand: true,                  // Enable dynamic expansion
-                    cwd: './',                   // Src matches are relative to this path
-                    src: ['img/*.{png,jpg,gif}'],   // Actual patterns to match
-                    dest: 'dist/'                  // Destination path prefix
-                }]
-            }
-        },
-        useminPrepare: {
-            foo: {
-                dest: 'dist',
-                src: ['contactus.html','aboutus.html','index.html','developer.html']
-            },
-            options: {
-                flow: {
-                    steps: {
-                        css: ['cssmin'],
-                        js:['uglify']
-                    },
-                    post: {
-                        css: [{
-                            name: 'cssmin',
-                            createConfig: function (context, block) {
-                            var generated = context.options.generated;
-                                generated.options = {
-                                    keepSpecialComments: 0, rebase: false
-                                };
-                            }       
-                        }]
-                    }
-                }
+                src: ['dist/']
             }
         },
 
-        // Concat
+        // Prepare usemin
+        useminPrepare: {
+            html: ['src/html/*.html'],
+            options: {
+                dest: 'dist'
+            }
+        },
+
+        // Concat files
         concat: {
             options: {
                 separator: ';'
             },
-  
-            // dist configuration is provided by useminPrepare
             dist: {}
         },
 
-        // Uglify
+        // Uglify JavaScript
         uglify: {
-            // dist configuration is provided by useminPrepare
             dist: {}
         },
 
+        // Minify CSS
         cssmin: {
             dist: {}
         },
 
-        // Filerev
+        // File revisioning
         filerev: {
             options: {
                 encoding: 'utf8',
                 algorithm: 'md5',
                 length: 20
             },
-  
             release: {
-            // filerev:release hashes(md5) all assets (images, js and css )
-            // in dist directory
                 files: [{
                     src: [
                         'dist/js/*.js',
-                        'dist/css/*.css',
+                        'dist/css/*.css'
                     ]
                 }]
             }
         },
-  
-        // Usemin
-        // Replaces all assets with their revved version in html and css files.
-        // options.assetDirs contains the directories for finding the assets
-        // according to their relative paths
+
+        // Usemin - Replace assets with revved versions
         usemin: {
-            html: ['dist/contactus.html','dist/aboutus.html','dist/index.html'],
+            html: ['dist/*.html'],
             options: {
-                assetsDirs: ['dist', 'dist/css','dist/js']
+                assetsDirs: ['dist', 'dist/css', 'dist/js']
             }
         }
     });
 
+    // Register tasks
     grunt.registerTask('css', ['sass']);
     grunt.registerTask('default', ['browserSync', 'watch']);
+    
     grunt.registerTask('build', [
         'clean',
+        'sass',
         'copy',
-        'imagemin',
         'useminPrepare',
         'concat',
         'cssmin',
@@ -169,5 +141,4 @@ module.exports = function (grunt) {
         'filerev',
         'usemin'
     ]);
-
 };

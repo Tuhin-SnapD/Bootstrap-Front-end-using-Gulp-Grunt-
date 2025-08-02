@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../css/styles.css" rel="stylesheet">
+    <title>High-Level Threads - Premium Fashion Rental Platform</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="./index.html"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=100&h=100&fit=crop&crop=center" class="img-fluid" style="max-height: 43px; max-width: 43px;" alt="High Level Threads Logo"></a>
+            <div class="collapse navbar-collapse" id="Navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span>
+                            Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
+                                class="fa fa-info fa-lg"></span> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
+                                class="fa fa-address-card fa-lg"></span> Contact</a></li>
+                                <li class="nav-item"><a class="nav-link" href="./developer.html"><span class="fa fa-user fa-lg"></span> Developer</a>
+                                </li>
+                </ul>
+                <div class="navbar-text">
+                    <a id="login" class="btn btn-warning" role="button">Login</a>
+                </div>
+            </div>
+    </nav>
+
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-sm-4">
+                                <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                                <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3"
+                                    placeholder="Enter email">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label class="sr-only" for="exampleInputPassword3">Password</label>
+                                <input type="password" class="form-control form-control-sm mr-1"
+                                    id="exampleInputPassword3" placeholder="Password">
+                            </div>
+                            <div class="col-sm-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label"> Remember me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <button type="button" class="btn btn-secondary btn-sm ml-auto"
+                                data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary btn-sm ml-1">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>High-Level Threads</h1>
+                    <p>
+                        A revolutionary fashion platform that provides sustainable, affordable, and premium rental clothing solutions. Experience style evolution with our monthly-changing fashion collections designed for the modern lifestyle.
+                    </p>
+                </div>
+                <div class="col-12 col-sm-3 align-self-center">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop&crop=center" class="img-fluid" style="max-height: 165px; max-width: 165px;" alt="High Level Threads Logo">
+                </div>
+                <div class="col-12 col-sm-3 align-self-center">
+                    <a id="reserve" class="btn btn-warning btn-lg" role="button">Check your sizes</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <div id="reserveModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Check your Size</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="reserveModalForm">
+                        <div class="form-group row align-items-center">
+                            <label class="col-12 col-sm-2 col-form-label">Your Size</label>
+                            <div class="form-check form-check-inline col-12 col-sm">
+                                <dd class="col-md-10 col-sm-12">
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="op" id="op" value="1"
+                                            checked="">
+                                        <label class="form-check-label">XS</label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="op" id="op" value="2">
+                                        <label class="form-check-label">S</label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="op" id="op" value="3">
+                                        <label class="form-check-label">M</label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="op" id="op" value="4">
+                                        <label class="form-check-label">L</label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="op" id="op" value="5">
+                                        <label class="form-check-label">XL</label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="op" id="op" value="6">
+                                        <label class="form-check-label">XXL</label>
+                                    </div>
+                                </dd>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label class="col-12 col-sm-2 col-form-label">Type</label>
+                            <div class="col-12 col-sm">
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-success active">
+                                        <input type="radio" name="options" id="option1" autocomplete="off" checked="">
+                                        Natural Fabric
+                                    </label>
+                                    <label class="btn btn-danger">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> Synthetic Fabric
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label class="col-12 col-sm-2 col-form-label">Date and Time When Needed</label>
+                            <div class="col-12 col-sm-5">
+                                <div class="input-group">
+                                    <i class="input-group-addon" aria-hidden="true"></i>
+                                    <input type="date" class="form-control" id="date" name="date" placeholder="Date">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-5">
+                                <div class="input-group">
+                                    <i class="input-group-addon" aria-hidden="true"></i>
+                                    <input type="time" class="form-control" id="time" name="time" placeholder="Time">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-sm-2 col-md-10">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-content">
+            <div class="col">
+                <div id="mycarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img class="d-block img-fluid" src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&h=600&fit=crop&crop=center" alt="Limited Edition Collection">
+                            <div class="carousel-caption d-none d-md-block">
+                                                <h2 class="mt-0">Limited Edition Collection
+                    <span class="badge badge-danger">Limited</span>
+                    <span class="badge badge-pill badge-secondary">50% Off</span>
+                </h2>
+                <p class="d-none d-sm-block">Valentine's Day Special Collection! Enjoy up to 50% off on exclusive limited edition apparel and rentals from premium brands. Use code: VALENTINE2025</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block img-fluid" src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop&crop=center" alt="Comfort & Style Collection">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h2 class="mt-0">Comfort & Style Collection
+                                    <span class="badge badge-danger">NEW</span>
+                                </h2>
+                                <p class="d-none d-sm-block">Discover the perfect blend of comfort and style! Enjoy up to 20% off on our newest additions from premium brands including Jockey, Zara, H&M, and more exclusive collections.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block img-fluid" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=600&fit=crop&crop=center" alt="Express Your Style">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h2 class="mt-0">Express Your Style
+                                    <span class="badge badge-danger">Trending</span>
+                                </h2>
+                                <p class="d-none d-sm-block">Discover your unique style! From gothic to pastel, casual to elegant - we have carefully curated collections for every personality. Our hand-picked styles are updated regularly to keep you ahead of fashion trends.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                    </ol>
+                    <a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                    <button class="btn btn-danger btn-sm" id="carouselButton">
+                        <span class="fa fa-pause"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-content align-items-center">
+                <div class="col-12 col-sm-4 order-sm-last col-md-3">
+                    <h3>Men's Collection</h3>
+                </div>
+                <div class="col col-sm order-sm-first col-md">
+                    <div class="media">
+                        <img class="d-flex mr-3 img-thumbnail align-self-center" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300&h=300&fit=crop&crop=center" 
+                            alt="Men's Fashion Collection" style="max-height: 250px; max-width: 250px;">
+                        <div class="media-body">
+                            <h2 class="mt-0">Men's Fashion
+                                <span class="badge badge-danger">HOT</span>
+                                <span class="badge badge-pill badge-secondary">Limited</span>
+                            </h2>
+                            <p class="d-none d-sm-block">High-level threads has a vast collection of men’s t-shirts, shirts, jeans, sneakers, sports shoes, wallets, trousers, and even personal grooming online as well as offline. A one-stop destination for all your shopping needs, Shoppers Stop caters to each taste and needs for men’s clothing and accessories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-content align-items-center">
+                <div class="col-12 col-sm-4 col-md-3">
+                    <h3>Rubrique Hommes</h3>
+                </div>
+                <div class="col col-sm col-md">
+                    <div class="media">
+                        <div class="media-body">
+                            <h2 class="mt-0">Women's wear <span class="badge badge-danger">Best-Seller</span></h2>
+                            <p class="d-none d-sm-block">At High-level threads, Explore women's clothing, accessories, beauty, and style according to your mood, need and preferences.opt for online shopping for women only at High-level threads. It's a one-stop fashion destination offering range of designer women’s clothes, handbags, sunglasses & other accessories. Access Endless Options Of Women’s Clothing.</p>
+                        </div>
+                        <img class="d-flex mr-3 img-thumbnail align-self-center" src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=300&h=300&fit=crop&crop=center" alt="Women's Fashion Collection" style="max-height: 250px; max-width: 250px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-content align-items-center">
+                <div class="col-12 col-sm-4 col-md-3 order-sm-last">
+                    <h3>Section enfants</h3>
+                </div>
+                <div class="col col-sm col-md order-sm-first">
+                    <div class="media">
+                        <img class="d-flex mr-3 img-thumbnail align-self-center" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300&h=300&fit=crop&crop=center" 
+                            alt="Kids Fashion Collection" style="max-height: 250px; max-width: 250px;">
+                        <div class="media-body">
+                            <h2 class="mt-0">Kid's Wear</h2>
+                            <h4>New Launch</h4>
+                            <p class="d-none d-sm-block">It is indeed a fun to shop for kids but at the same time it also becomes a challenging task due to several factors! It becomes a tricky task for the parents to select the apt dress for their kids. Here, it becomes the multidimensional task for the moms to pick up the best ones from the Kids wear section!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="contactus.html">Contact</a></li>
+                        <li><a href="developer.html">Developer</a></li>
+                    </ul>
+                </div>
+                <div class="col-7 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+                        VIT, Vellore Campus,  <br>
+                        Tiruvalam Rd, Katpadi,<br>
+                        Vellore, Tamil Nadu 632014<br><br>
+                        <i class="fa fa-phone fa-lg"></i>: +0416 220 2020<br>
+                        <i class="fa fa-fax fa-lg"></i>: +0416 220 2020<br>
+                        <i class="fa fa-envelope fa-lg"></i>:
+                        <a href="mailto:confusion@food.net">highlevelthreads@clothes.net</a>
+                    </address>
+                </div>
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i
+                                class="fa fa-google-plus"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="https://www.facebook.com/"><i
+                                class="fa fa-facebook"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i
+                                class="fa fa-linkedin"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i
+                                class="fa fa-twitter"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i
+                                class="fa fa-youtube"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-auto" id="foot">
+                    <p>© Copyright 2022 HighLevelThreads.in</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+    
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="../js/scripts.js"></script>
+</body>
+
+</html>
